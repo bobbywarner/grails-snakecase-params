@@ -23,7 +23,7 @@ class SnakecaseParamsGrailsPlugin {
     def description = "Converts parameters from snake_case to camelCase."
     def documentation = "http://grails.org/plugin/snakecase-params"
     def license = "APACHE"
-    def issueManagement = [ system: "JIRA", url: "http://github.com/bobbywarner/grails-snakecase-params/issues" ]
+    def issueManagement = [ system: "GITHUB", url: "http://github.com/bobbywarner/grails-snakecase-params/issues" ]
     def scm = [ url: "http://github.com/bobbywarner/grails-snakecase-params" ]
     def developers = [[ name: "Bobby Warner", email: "bobbywarner@gmail.com" ]]
 

@@ -5,7 +5,6 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.dependency.resolution = {
     inherits "global"
     log "warn"
-    legacyResolve false
     repositories {
         grailsCentral()
         mavenCentral()
