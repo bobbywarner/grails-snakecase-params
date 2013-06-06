@@ -22,13 +22,16 @@ class SnakecaseParamsGrailsPlugin {
             }
         }
 
-        def filter = webXml.'filter'
-        filter[filter.size() - 1] + {
+        // Insert the filter after the Spring character encoding filter
+        def filter = webXml.'filter-mapping'.find {
+            it.'filter-name'.text() == "charEncodingFilter"
+        }
+
+        filter + {
             'filter-mapping'{
                 'filter-name'('snakecaseParamsFilter')
                 'url-pattern'('/*')
-            }
+            }    
         }
     }
-
 }
