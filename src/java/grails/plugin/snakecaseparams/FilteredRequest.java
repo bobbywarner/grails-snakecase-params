@@ -16,7 +16,10 @@
 package grails.plugin.snakecaseparams;
 
 import java.util.Map;
+import java.util.List;
 import java.util.HashMap;
+import java.util.Collections;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -24,26 +27,47 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import grails.util.GrailsNameUtils;
 
 public class FilteredRequest extends HttpServletRequestWrapper {
-    private Map<String, String[]> newParams = null;
+    private Map<String, String[]> params = null;
 
     public FilteredRequest(HttpServletRequest request) {
         super(request);
-    }
+        params = new HashMap<String, String[]>();
 
-    public Map<String, String[]> convertParams(Map<String, String[]> params) {
-        newParams = new HashMap<String, String[]>();
-        
+        Map<String, String[]> oldParams = super.getParameterMap();
+
         String originalKey = null;
         String newKey = null;
 
-        for (Object key: params.keySet()) {
+        for (Object key: oldParams.keySet()) {
             originalKey = (String)key;
             System.out.println("Original Key: " + originalKey);
             newKey = GrailsNameUtils.getPropertyNameForLowerCaseHyphenSeparatedName(originalKey.replace("_","-"));
             System.out.println("New Key: " + newKey);
-            newParams.put(newKey, params.get(originalKey));
-        }
-        
-        return newParams;
+            params.put(newKey, oldParams.get(originalKey));
+        }        
     }
+
+    @Override
+    public String getParameter(final String paramName) {            
+        String[] strings = getParameterMap().get(paramName);
+        if (strings != null) {
+            return strings[0];
+        }
+        return super.getParameter(paramName);        
+    }
+
+    @Override
+    public Map<String, String[]> getParameterMap() {
+        return Collections.unmodifiableMap(params);
+    }     
+
+    @Override
+    public Enumeration<String> getParameterNames() {
+        return Collections.enumeration(getParameterMap().keySet());
+    }
+
+    @Override
+    public String[] getParameterValues(final String paramName) {           
+        return getParameterMap().get(paramName);
+    }   
 }

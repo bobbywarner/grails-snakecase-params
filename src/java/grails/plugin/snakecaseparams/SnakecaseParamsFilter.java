@@ -27,19 +27,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-public class SnakecaseParamsFilter implements Filter {
-    public void init(FilterConfig filterConfig) throws ServletException { }    
+import org.springframework.web.filter.OncePerRequestFilter;
 
-    public void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain)
+public class SnakecaseParamsFilter extends OncePerRequestFilter {
+    public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
                 throws IOException, ServletException {
 
-        HttpServletRequest request = (HttpServletRequest)req;
-        HttpServletResponse response = (HttpServletResponse)res;
-
         FilteredRequest filteredRequest = new FilteredRequest(request);
-        filteredRequest.convertParams(request.getParameterMap());
-        chain.doFilter(filteredRequest, response);
+        filterChain.doFilter(filteredRequest, response);
     }
-
-    public void destroy() { }
 }
