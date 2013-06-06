@@ -16,7 +16,6 @@
 package grails.plugin.snakecaseparams;
 
 import java.util.Map;
-import java.util.List;
 import java.util.HashMap;
 import java.util.Collections;
 import java.util.Enumeration;
