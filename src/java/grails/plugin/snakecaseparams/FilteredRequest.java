@@ -39,9 +39,7 @@ public class FilteredRequest extends HttpServletRequestWrapper {
 
         for (Object key: oldParams.keySet()) {
             originalKey = (String)key;
-            System.out.println("Original Key: " + originalKey);
             newKey = GrailsNameUtils.getPropertyNameForLowerCaseHyphenSeparatedName(originalKey.replace("_","-"));
-            System.out.println("New Key: " + newKey);
             params.put(newKey, oldParams.get(originalKey));
         }        
     }
