@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import grails.util.GrailsNameUtils;
 
 public class FilteredRequest extends HttpServletRequestWrapper {
-    private Map<String, String[]> params = null;
+    private final Map<String, String[]> params;
 
     public FilteredRequest(HttpServletRequest request) {
         super(request);
