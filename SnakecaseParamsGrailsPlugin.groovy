@@ -16,7 +16,7 @@
 import grails.plugin.snakecaseparams.SnakecaseParamsFilter
 
 class SnakecaseParamsGrailsPlugin {
-    def version = "0.1"
+    def version = "0.2"
     def grailsVersion = "2.0 > *"
 
     def title = "Snakecase Params Plugin"
@@ -25,7 +25,10 @@ class SnakecaseParamsGrailsPlugin {
     def license = "APACHE"
     def issueManagement = [ system: "GITHUB", url: "http://github.com/bobbywarner/grails-snakecase-params/issues" ]
     def scm = [ url: "http://github.com/bobbywarner/grails-snakecase-params" ]
-    def developers = [[ name: "Bobby Warner", email: "bobbywarner@gmail.com" ]]
+    def developers = [
+        [ name: "Bobby Warner", email: "bobbywarner@gmail.com" ],
+        [ name: "Dan Woods", email: "daniel.p.woods@gmail.com" ]
+    ]
 
     def doWithWebDescriptor = { webXml ->
         def contextParam = webXml.'context-param'
