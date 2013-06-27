@@ -23,8 +23,6 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-import grails.util.GrailsNameUtils;
-
 public class FilteredRequest extends HttpServletRequestWrapper {
     private final Map<String, String[]> params;
 
@@ -39,24 +37,24 @@ public class FilteredRequest extends HttpServletRequestWrapper {
 
         for (Object key: oldParams.keySet()) {
             originalKey = (String)key;
-            newKey = GrailsNameUtils.getPropertyNameForLowerCaseHyphenSeparatedName(originalKey.replace("_","-"));
+            newKey = GrailsNameUtils.getPropertyNameForSnakeCaseName(originalKey);
             params.put(newKey, oldParams.get(originalKey));
-        }        
+        }
     }
 
     @Override
-    public String getParameter(final String paramName) {            
+    public String getParameter(final String paramName) {
         String[] strings = getParameterMap().get(paramName);
         if (strings != null) {
             return strings[0];
         }
-        return super.getParameter(paramName);        
+        return super.getParameter(paramName);
     }
 
     @Override
     public Map<String, String[]> getParameterMap() {
         return Collections.unmodifiableMap(params);
-    }     
+    }
 
     @Override
     public Enumeration<String> getParameterNames() {
@@ -64,7 +62,7 @@ public class FilteredRequest extends HttpServletRequestWrapper {
     }
 
     @Override
-    public String[] getParameterValues(final String paramName) {           
+    public String[] getParameterValues(final String paramName) {
         return getParameterMap().get(paramName);
-    }   
+    }
 }

@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import grails.plugin.snakecaseparams.GrailsNameUtils;
+
 public class SnakecaseParamsFilter extends OncePerRequestFilter {
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
                 throws IOException, ServletException {
