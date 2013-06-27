@@ -17,6 +17,24 @@ class GrailsNameUtilsSpec extends Specification {
         assert "snakeCaseParam" == propertyName
     }
 
+    def "test null"() {
+        setup:
+        def snake = null
+        def propertyName = GrailsNameUtils.getPropertyNameForSnakeCaseName(snake)
+
+        expect:
+        assert null == propertyName
+    }
+
+    def "test empty"() {
+        setup:
+        def snake = ""
+        def propertyName = GrailsNameUtils.getPropertyNameForSnakeCaseName(snake)
+
+        expect:
+        assert "" == propertyName
+    }
+
     def "test beginning underscore"() {
         setup:
         def snake = "_snake_case_param"
@@ -62,4 +80,12 @@ class GrailsNameUtilsSpec extends Specification {
         assert "snakeCaseParam" == propertyName
     }
 
+    def "test hypenated"() {
+        setup:
+        def snake = "snake-case-param"
+        def propertyName = GrailsNameUtils.getPropertyNameForSnakeCaseName(snake)
+
+        expect:
+        assert "snake-case-param" == propertyName
+    }
 }
